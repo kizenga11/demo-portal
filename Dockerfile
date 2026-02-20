@@ -16,8 +16,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
  && npm install \
  && npm run build
 
-RUN php artisan config:cache && php artisan route:cache
+# Make start script executable
+RUN chmod +x /app/start.sh
 
 EXPOSE 10000
 
-CMD php -S 0.0.0.0:${PORT:-10000} -t public
+CMD ["/app/start.sh"]
